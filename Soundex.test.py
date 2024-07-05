@@ -11,12 +11,13 @@ class TestSoundex(unittest.TestCase):
     def test_multiple_characters(self):
         self.assertEqual(generate_soundex("water"), "W360")
         self.assertEqual(generate_soundex("asdfghjk"), "A231")
-        self.assertEqual(generate_soundex("qxecyn"), "Q250")
+
+    def test_longer_than_4(self):
+        self.assertEqual(generate_soundex("assignment"), "A225")
+        self.assertEqual(generate_soundex("umbrella"), "U516")
     
-    def test_names_with_non_alphabetic_characters(self):
-        self.assertEqual(generate_soundex("O'Conner"), "O256")
-        self.assertEqual(generate_soundex("McDonald"), "M235")
-        self.assertEqual(generate_soundex("D'Angelo"), "D524")
+    def test_special_characters(self):
+        self.assertEqual(generate_soundex("_abc"), "A120")
 
 if __name__ == '__main__':
     unittest.main()
