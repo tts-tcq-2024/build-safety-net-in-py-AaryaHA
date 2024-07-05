@@ -20,16 +20,11 @@ def initialize_soundex(name):
 def should_add_code(char, code, prev_code):
     return code != '0' and code != prev_code
 
-def add_soundex_code(soundex, char, prev_code):
-    code = get_soundex_code(char)
-    if should_add_code(char, code, prev_code):
-        soundex += code
-        prev_code = code
-    return soundex, prev_code
-
 def generate_soundex(name):
-    soundex, prev_code = initialize_soundex(name)
+    if not name:
+        return ""
 
+    soundex, prev_code = initialize_soundex(name)
     if not soundex:
         return ""
 
