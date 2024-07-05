@@ -27,21 +27,19 @@ def add_soundex_code(soundex, char, prev_code):
         prev_code = code
     return soundex, prev_code
 
-def truncate_soundex(soundex):
-    return soundex[:4]
-
-def pad_soundex(soundex):
-    return soundex.ljust(4, '0')
-
 def generate_soundex(name):
     soundex, prev_code = initialize_soundex(name)
 
     if not soundex:
         return ""
 
-    for char in name[1:]:
-        soundex, prev_code = add_soundex_code(soundex, char, prev_code)
-        if len(soundex) == 4:
-            break
+    def process_character(soundex, prev_code, char):
+        code = get_soundex_code(char)
+        if should_add_code(char, code, prev_code):
+            soundex += code
+            prev_code = code
+        return soundex, prev_code
 
-    return pad_soundex(soundex)
+    soundex = soundex + ''.join(process_character(soundex, prev_code, char) for char in name[1:] if len(soundex) < 4)
+    
+    return soundex.ljust(4, '0')
