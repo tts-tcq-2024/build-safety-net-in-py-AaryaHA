@@ -33,13 +33,13 @@ def generate_soundex(name):
     if not soundex:
         return ""
 
-    def process_character(soundex, prev_code, char):
+    i = 1
+    while len(soundex) < 4 and i < len(name):
+        char = name[i]
         code = get_soundex_code(char)
         if should_add_code(char, code, prev_code):
             soundex += code
             prev_code = code
-        return soundex, prev_code
+        i += 1
 
-    soundex = soundex + ''.join(process_character(soundex, prev_code, char) for char in name[1:] if len(soundex) < 4)
-    
     return soundex.ljust(4, '0')
