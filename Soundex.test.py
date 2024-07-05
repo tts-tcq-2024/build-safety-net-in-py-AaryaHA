@@ -14,7 +14,7 @@ class TestSoundex(unittest.TestCase):
 
     def test_longer_than_4(self):
         self.assertEqual(generate_soundex("friday"), "F630")
-        self.assertEqual(generate_soundex("umbrella"), "F516")
+        self.assertEqual(generate_soundex("umbrella"), "U516")
     
     def vowels(self):
         self.assertEqual(generate_soundex("A"), "A000")
