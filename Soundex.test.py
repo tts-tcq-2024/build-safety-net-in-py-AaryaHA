@@ -23,5 +23,13 @@ class TestSoundex(unittest.TestCase):
         self.assertEqual(generate_soundex("O"), "O000")
         self.assertEqual(generate_soundex("U"), "U000")
 
+    def special_chars(self):
+        self.assertEqual(generate_soundex("L_@#$"), "L000")
+        self.assertEqual(generate_soundex("Q.&*^"), "Q000")
+
+    def repeating_letters(self):
+        self.assertEqual(generate_soundex("monsoon"), "M525")
+        self.assertEqual(generate_soundex("book"), "B200")
+
 if __name__ == '__main__':
     unittest.main()
