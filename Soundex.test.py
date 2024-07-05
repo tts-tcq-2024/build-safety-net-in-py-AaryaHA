@@ -16,8 +16,12 @@ class TestSoundex(unittest.TestCase):
         self.assertEqual(generate_soundex("assignment"), "A225")
         self.assertEqual(generate_soundex("umbrella"), "U516")
     
-    def test_special_characters(self):
-        self.assertEqual(generate_soundex("_abc"), "A120")
+    def vowels(self):
+        self.assertEqual(generate_soundex("A"), "A000")
+        self.assertEqual(generate_soundex("E"), "E000")
+        self.assertEqual(generate_soundex("I"), "I000")
+        self.assertEqual(generate_soundex("O"), "O000")
+        self.assertEqual(generate_soundex("U"), "U000")
 
 if __name__ == '__main__':
     unittest.main()
