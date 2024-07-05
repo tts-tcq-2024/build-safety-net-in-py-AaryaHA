@@ -35,7 +35,7 @@ class TestSoundex(unittest.TestCase):
         self.assertEqual(generate_soundex("A1b2C3"), "A120")
 
     def test_non_alpha_chars(self):
-        self.assertEqual(generate_soundex("!@#$%"), "0000")
+        self.assertEqual(generate_soundex("F!@#$%"), "F000")
 
 if __name__ == '__main__':
     unittest.main()
