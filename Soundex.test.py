@@ -10,7 +10,6 @@ class TestSoundex(unittest.TestCase):
         self.assertEqual(generate_soundex("A"), "A000")
         self.assertEqual(generate_soundex("B"), "B000")
         self.assertEqual(generate_soundex("C"), "C000")
-        # Test lowercase character
         self.assertEqual(generate_soundex("z"), "Z000")
 
     def test_basic_soundex_generation(self):
@@ -22,7 +21,6 @@ class TestSoundex(unittest.TestCase):
         self.assertEqual(generate_soundex("O'Conner"), "O256")
         self.assertEqual(generate_soundex("McDonald"), "M235")
         self.assertEqual(generate_soundex("D'Angelo"), "D524")
-    
 
     def test_long_name(self):
         self.assertEqual(generate_soundex("Christopher"), "C623")
