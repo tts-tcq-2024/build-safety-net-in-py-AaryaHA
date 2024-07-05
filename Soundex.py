@@ -9,17 +9,27 @@ def get_soundex_code(c):
         'R': '6'
     }
     return mapping.get(c, '0')  # Default to '0' for non-mapped characters
-
-
-def generate_soundex(name, soundex=None):
-    if soundex is None:
-        soundex = name[0].upper() if name else ""
-    
-    if len(soundex) == 4:
-        return soundex.ljust(4, '0')
-    
-    if len(name) > 1:
-        code = get_soundex_code(name[1])
-        if code != '0' and code != soundex[-1]:
-            soundex += code
-    return generate_soundex(name[1:], soundex)
+ 
+def initialize_soundex(name):
+    # Initialize the soundex code with the first letter
+    first_letter = name[0].upper()
+    return first_letter, get_soundex_code(first_letter)
+ 
+def should_add_code(char, code, prev_code):
+    return code != '0' and code != prev_code
+ 
+def process_characters(name, soundex, prev_code):
+    codes = [get_soundex_code(char) for char in name[1:] if should_add_code(char, get_soundex_code(char), prev_code)]
+    return (soundex + ''.join(codes)[:3]).ljust(4, '0')
+ 
+def pad_soundex(soundex):
+    # Pad with zeros if necessary to ensure length is 4
+    return soundex.ljust(4, '0')
+ 
+def generate_soundex(name):
+    if not name:
+        return ""
+ 
+    soundex, prev_code = initialize_soundex(name)
+    soundex = process_characters(name, soundex, prev_code)
+    return pad_soundex(soundex)
